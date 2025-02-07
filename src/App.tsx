@@ -1,4 +1,3 @@
-import { DarkThemeToggle } from "flowbite-react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import Desplay from "./Desplay";
