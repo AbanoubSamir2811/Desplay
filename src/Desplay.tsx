@@ -100,7 +100,7 @@ function Display() {
             ) : (
                 <div className="flex w-screen min-h-screen flex-col items-center justify-center bg-[#06878E] pb-[50px] md:pb-0 px-4">
                     <img src={logo1} alt="Flowbite Logo" className="h-56 w-auto" />
-                    <h1>لحظات لتدشين هوية مجلس الجمعيات الأهلية الجديد</h1>
+                    <h1 className='text-3xl font-bold text-white text-center my-5'>لحظات لتدشين هوية مجلس الجمعيات الأهلية الجديد</h1>
                 </div>
             )}
         </>
