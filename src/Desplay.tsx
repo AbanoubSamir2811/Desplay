@@ -60,8 +60,8 @@ function Display() {
             {hasValidNums ? (
                 <div className="w-[100vw] flex justify-center items-center" id="allLogo">
                     {/* Text element with motion effect */}
-                    <div className={motion ? 'h-[50vh] w-[30px] absolute top-[30vh] right-[65vw] text-5xl text-justify animate__animated animate__flash' : 'hidden'}>
-                        <p className='text-wrap text-justify leading-[70px] mb-4'>مــــــجــــــلــــــــس الجمعيات الأهـــــــلــــــيـــــــة</p>
+                    <div className={motion ? 'h-[50vh] w-[30px] absolute top-[30vh] right-[67vw] text-5xl text-justify animate__animated animate__flash' : 'hidden'}>
+                        <p className='text-wrap text-justify leading-[65px] mb-4'>مــــــجــــــلــــــــس الجمعيات الأهـــــــلــــــيـــــــة</p>
                         <p className='text-nowrap text-2xl font-bold text-justify'>Council Of CSA</p>
                     </div>
                     <div className={motion ? 'w-full relative transition ease-in-out -translate-x-[-100px]' : 'w-full relative transition'} id='logo'>
