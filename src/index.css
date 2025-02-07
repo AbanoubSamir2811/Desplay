@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Avenir';
+    src: url('./fonts/alfont_com_AlFont_com_Avenir-Medium.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: '29LT Zarid';
+    src: url('./fonts/alfont_com_29LTZaridSlab-Black.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+body{
+    font-family: 'Avenir';
+    overflow-x: hidden;
+}
