@@ -19,11 +19,18 @@ function Home() {
     // Function to delete the entire Firestore collection
     async function deleteEntireCollection() {
         const userCollectionRef = collection(db, "user"); // Reference to the "user" collection
+        const adminCollectionRef = collection(db, "admin"); // Reference to the "admin" collection
         try {
             const querySnapshot = await getDocs(userCollectionRef); // Fetch all documents in the collection
+            const querySnapshot2 = await getDocs(adminCollectionRef); // Fetch all documents in the collection
 
             // Delete each document one by one
             querySnapshot.forEach(async (doc) => {
+                await deleteDoc(doc.ref); // Delete the document
+                console.log(`Document with ID ${doc.id} deleted.`);
+            });
+
+            querySnapshot2.forEach(async (doc) => {
                 await deleteDoc(doc.ref); // Delete the document
                 console.log(`Document with ID ${doc.id} deleted.`);
             });
@@ -55,7 +62,7 @@ function Home() {
 
 
     return (
-        <main className="flex w-screen min-h-screen flex-col items-center justify-start bg-[#06878E] pb-[50px] md:pb-0 px-4">
+        <main className="flex w-screen min-h-screen flex-col items-center justify-start bg-[#090951] pb-[50px] md:pb-0 px-4">
             <img
                 src={logo1}
                 alt="Flowbite Logo"
@@ -117,7 +124,7 @@ function Home() {
                     إعادة البدء
                 </button>
                 <button
-                    className="text-2xl font-bold text-black text-center mt-4 bg-[#B5B89F] h-16 w-36 rounded-md"
+                    className="text-2xl font-bold text-black text-center my-4 bg-[#B5B89F] h-16 w-36 rounded-md"
                     onClick={() => navigate('/desplay')}
                 >
                     شاشة العرض

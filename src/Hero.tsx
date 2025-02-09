@@ -16,9 +16,15 @@ function Hero() {
   }, []); // ✅ Runs only once when the component mounts
 
   async function toDesplay() {
-    const userRef = doc(db, 'user', `number${localStorage.getItem('user')}`)
-    await setDoc(userRef, {id: localStorage.getItem('user')});
-    navigate("/");
+    if(localStorage.getItem('user') == "14"){
+      const userRef = doc(db, 'admin', `admin`)
+      await setDoc(userRef, {admin: "admin"});
+      navigate("/");
+    }else{
+      const userRef = doc(db, 'user', `number${localStorage.getItem('user')}`)
+      await setDoc(userRef, {id: localStorage.getItem('user')});
+      navigate("/");
+    }
   }
 
   useEffect(() => {
@@ -26,7 +32,7 @@ function Hero() {
   }, [user]);
 
   return (
-    <div className="flex w-screen min-h-screen flex-col items-center justify-start bg-[#06878E] pb-[50px] md:pb-0 px-4">
+    <div className="flex w-screen min-h-screen flex-col items-center justify-start bg-[#090951] pb-[50px] md:pb-0 px-4">
       <img src={logo1} alt="Flowbite Logo" className="h-64 w-auto mt-5" />
       <h1 className="text-3xl font-bold text-white text-center my-5 mt-28">
         لتدشين هويتك البصرية الجديدة
