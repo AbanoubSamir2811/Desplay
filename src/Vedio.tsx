@@ -38,7 +38,7 @@ function Video() {
         Your browser does not support the video tag.
       </video>
 
-      {/* Optional: Add a button to indicate unmute */}
+      {/* Optional: Add a button to indicate unmute
       {isMuted && (
         <button
           className="absolute bottom-10 bg-white text-black px-4 py-2 rounded"
@@ -46,7 +46,7 @@ function Video() {
         >
           Unmute
         </button>
-      )}
+      )} */}
     </div>
   );
 }
