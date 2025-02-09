@@ -1,9 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect, useState } from 'react';
 
 const videoSrc = new URL("./assets/Final Video.mp4", import.meta.url).href;
 
 function Video() {
-  const videoRef = useRef(null);
+  // Explicitly type the ref as an HTMLVideoElement
+  const videoRef = useRef<HTMLVideoElement>(null);
   const [isMuted, setIsMuted] = useState(true); // Start with muted video
 
   // Unmute the video on user interaction
@@ -19,12 +20,6 @@ function Video() {
       videoRef.current.volume = 1; // Set volume to maximum
       videoRef.current.muted = isMuted; // Mute or unmute based on state
     }
-    // setTimeout(() => {
-    //     if (videoRef.current) {
-    //   videoRef.current.muted = false;
-    //   setIsMuted(false);
-    // }
-    // }, 10)
   }, [isMuted]);
 
   return (
@@ -44,14 +39,14 @@ function Video() {
       </video>
 
       {/* Optional: Add a button to indicate unmute */}
-      {/* {isMuted && (
+      {isMuted && (
         <button
           className="absolute bottom-10 bg-white text-black px-4 py-2 rounded"
           onClick={handleUnmute}
         >
           Unmute
         </button>
-      )} */}
+      )}
     </div>
   );
 }

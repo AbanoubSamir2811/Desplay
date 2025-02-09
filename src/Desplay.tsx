@@ -18,7 +18,6 @@ import part10 from './assets/10.png';
 import part11 from './assets/11.png';
 import part12 from './assets/12.png';
 import part13 from './assets/13.png';
-import part14 from './assets/14.png';
 import { useNavigate } from 'react-router-dom';
 
 function Display() {
