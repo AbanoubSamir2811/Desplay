@@ -37,7 +37,7 @@ function Home() {
 
             console.log("Entire collection deleted.");
             alert("Entire collection deleted successfully!");
-            navigate('/desplay');
+            navigate('/');
         } catch (error) {
             console.error("Error deleting collection: ", error);
             alert("Error deleting collection!");
