@@ -4,7 +4,7 @@ import { db } from './Firebase/configs';
 import 'animate.css';
 import logo1 from "./assets/logo1.png";
 import logo from './assets/Untitlvved-1-29.png';
-import soundEffect from './assets/preview.mp3'; // ✅ Import the MP3 file
+import soundEffect from './assets/فثل.mov'; // ✅ Import the MP3 file
 import { useNavigate } from 'react-router-dom';
 
 // Import images
