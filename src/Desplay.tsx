@@ -1,9 +1,12 @@
-import  { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { doc, onSnapshot } from 'firebase/firestore';
-import { db } from './Firebase/configs'; // Ensure this path is correct
+import { db } from './Firebase/configs';
 import 'animate.css';
 import logo1 from "./assets/logo1.png";
 import logo from './assets/Untitlvved-1-29.png';
+import soundEffect from './assets/preview.mp3'; // ✅ Import the MP3 file
+import { useNavigate } from 'react-router-dom';
+
 // Import images
 import part1 from './assets/1.png';
 import part2 from './assets/2.png';
@@ -18,17 +21,15 @@ import part10 from './assets/10.png';
 import part11 from './assets/11.png';
 import part12 from './assets/12.png';
 import part13 from './assets/13.png';
-import { useNavigate } from 'react-router-dom';
 
 function Display() {
-    const [nums, setNums] = useState(Array(13).fill(null)); // Initialize with null values
+    const [nums, setNums] = useState(Array(13).fill(null));
     const [motion, setMotion] = useState(false);
     const [zoomIn, setZoomIn] = useState(false);
     const [zoomOut, setZoomOut] = useState(false);
     const [admin, setAdmin] = useState(false);
     const navigate = useNavigate();
 
-    // Fetch data from Firestore
     useEffect(() => {
         const unsubscribes = Array.from({ length: 13 }, (_, i) => {
             const docRef = doc(db, "user", `number${i + 1}`);
@@ -41,74 +42,78 @@ function Display() {
             });
         });
 
-        // Cleanup the listeners on component unmount
         return () => unsubscribes.forEach((unsubscribe) => unsubscribe());
     }, []);
 
-    useEffect(() => {
-        const docRef = doc(db, "admin", "admin");
-        
-        const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
-            setMotion(docSnapshot.exists());
-            setAdmin(docSnapshot.exists());
-            console.log(admin)
-        });
-    
-        // Cleanup the listener on component unmount
-        return () => unsubscribe();
-    }, []);
-    
+    const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    // Trigger motion effect when all documents are loaded
+    useEffect(() => {
+        // ✅ Initialize and store audio instance
+        audioRef.current = new Audio(soundEffect);
+        audioRef.current.loop = true; // Enable looping
+
+        audioRef.current.play().catch(error => console.log("Autoplay error:", error));
+
+        const docRef = doc(db, "admin", "admin");
+        const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+            setAdmin(docSnapshot.exists());
+        });
+
+        return () => {
+            if (audioRef.current) {
+                audioRef.current.pause();
+                audioRef.current.currentTime = 0;
+            }
+            unsubscribe();
+        };
+    }, []);
+
     useEffect(() => {
         if (admin) {
-            // setTimeout(() => {
-            //     setMotion(true);
-            // }, 2000);
-            // setTimeout(() => {
-            //     navigate('/vedio');
-            // }, 4000)
+            
+
             setTimeout(() => {
                 setMotion(false);
                 setZoomIn(true);
-            },500)
+            }, 500);
             setTimeout(() => {
                 setMotion(false);
                 setZoomIn(false);
                 setZoomOut(true);
-            }, 1000)
+            }, 1000);
             setTimeout(() => {
                 setMotion(false);
                 setZoomIn(true);
-            },2000)
+            }, 2000);
             setTimeout(() => {
                 setMotion(false);
                 setZoomIn(false);
                 setZoomOut(true);
-            }, 3000)
+            }, 3000);
             setTimeout(() => {
                 setMotion(false);
                 setZoomIn(true);
-            },4000)
+            }, 4000);
             setTimeout(() => {
+                if (audioRef.current) {
+                    audioRef.current.pause(); // Stop audio
+                    audioRef.current.currentTime = 0; // Reset time
+                }
                 navigate('/vedio');
-            },5000)
+            }, 5000);
         } else {
             setMotion(false);
         }
     }, [admin]);
 
-    // Check if any num is not null
     const hasValidNums = nums.some((num) => num !== null);
 
     return (
         <>
             {hasValidNums ? (
                 <div className={motion || zoomIn || zoomOut ? "w-[100vw] flex justify-center items-center h-[100vh] bg-[#090951] overflow-hidden" : "w-[100vw] flex justify-center items-center bg-[#090951] over"} id="allLogo">
-                    {/* Text element with motion effect */}
                     <img src={logo} alt="logo" className={motion ? 'h-[70vh] w-auto  animate__animated animate__zoomIn transition-all ease-in-out scale-150 duration-1000' : zoomIn ? 'h-[70vh] w-auto transition-all ease-in-out scale-150 duration-1000' : zoomOut ? 'h-[70vh] w-auto transition-all ease-in-out scale-100 duration-1000' : "hidden"} />
                     <div className={motion || zoomIn || zoomOut ? 'hidden' : 'w-full relative transition bg-[#090951]'} id='logo'>
-                        {/* Render images conditionally based on the nums state */}
                         {nums.map((num, index) => {
                             const partImages = [part1, part2, part3, part4, part5, part6, part7, part8, part9, part10, part11, part12, part13];
                             const animations = [
